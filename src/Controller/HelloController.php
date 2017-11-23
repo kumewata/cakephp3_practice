@@ -11,19 +11,29 @@ namespace App\Controller;
 
 class HelloController extends AppController
 {
-    public $name = 'Hello';
-    public $autoRender = true;
+    public function initialize()
+    {
+        $this->viewBuilder()->layout('Hello');
+        $this->set('msg', 'Hello/index');
+        $this->set('footer', 'Hello\footer2');
+    }
+
 
     /**
      *
      */
     public function index(){
-//        $this->setAction("other"); // フォワード
-//        $this->redirect("/hello/other"); // リダイレクト
-//        $this->viewBuilder()->autoLayout(false);
+
     }
 
-//    public function other(){
-//        echo "これはindex以外のページです";
-//    }
+    public function sendForm() {
+        $str = $this->request->query['text1'];
+        $result = "";
+        if ($str != "") {
+            $result = "you type: " . $str;
+        } else {
+            $result = "empty";
+        }
+        $this->set("result", $result);
+    }
 }
